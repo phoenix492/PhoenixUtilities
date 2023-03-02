@@ -1,4 +1,6 @@
 #include "Utility.hpp"
+#include <sstream>
+
 template <typename T> util::LoopingLinkedList<T>::LoopingLinkedList() {
 			head = nullptr;
 			tail = nullptr;
@@ -101,24 +103,32 @@ void util::Timekeeper::stop() {
 	end = std::chrono::high_resolution_clock::now();	
 }
 
-void util::Timekeeper::printDurationSeconds() {
+std::string util::Timekeeper::durationSeconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
-	std::cout << "Time taken: " << timeTaken.count() << " seconds" << std::endl;
+	std::ostringstream out;
+	out << timeTaken.count();
+	return out.str();
 }
 
-void util::Timekeeper::printDurationMilliseconds() {
+std::string util::Timekeeper::durationMilliseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-	std::cout << "Time taken: " << timeTaken.count() << " milliseconds" << std::endl;
+	std::ostringstream out;
+	out << timeTaken.count();
+	return out.str();
 }
 
-void util::Timekeeper::printDurationMicroseconds() {
+std::string util::Timekeeper::durationMicroseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-	std::cout << "Time taken: " << timeTaken.count() << " microseconds" << std::endl;
+	std::ostringstream out;
+	out << timeTaken.count();
+	return out.str();
 }
 
-void util::Timekeeper::printDurationNanoseconds() {
+std::string util::Timekeeper::durationNanoseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-	std::cout << "Time taken: " << timeTaken.count() << " nanoseconds" << std::endl;
+	std::ostringstream out;
+	out << timeTaken.count();
+	return out.str();
 }
 
 

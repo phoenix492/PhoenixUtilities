@@ -34,10 +34,10 @@ namespace util {
 			Timekeeper();
 			void start();
 			void stop();
-			void printDurationSeconds();
-			void printDurationMilliseconds();
-			void printDurationMicroseconds();
-			void printDurationNanoseconds();
+			std::string durationSeconds();
+			std::string durationMilliseconds();
+			std::string durationMicroseconds();
+			std::string durationNanoseconds();
 	};
 
 
