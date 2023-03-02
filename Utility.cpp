@@ -52,7 +52,7 @@ LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* start)
 	
 	// Generate the first "turn" of the wheel
 	for (int i : *basis) {
-		product *= i; //The product of the basis is used to determine the first turn is finished
+		product *= i; //The product of the basis is used to determine when the first turn is finished
 	}
 	while (!wheelGenerated) {
 		// Starting on 2, we check every number to see if it's divisible by the
