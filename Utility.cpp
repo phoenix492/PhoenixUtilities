@@ -1,10 +1,10 @@
 #include "Utility.hpp"
-template <typename T> LoopingLinkedList<T>::LoopingLinkedList() {
+template <typename T> util::LoopingLinkedList<T>::LoopingLinkedList() {
 			head = nullptr;
 			tail = nullptr;
 			s = 0;
 }
-template <typename T> LoopingLinkedList<T> LoopingLinkedList<T>::app(T item) {
+template <typename T> util::LoopingLinkedList<T> util::LoopingLinkedList<T>::app(T item) {
 	Node* newNode = new Node;
 	newNode->data = item;
 	newNode->next = nullptr;
@@ -28,21 +28,21 @@ template <typename T> LoopingLinkedList<T> LoopingLinkedList<T>::app(T item) {
 
 };
 
-template <typename T> int LoopingLinkedList<T>::size() {
+template <typename T> int util::LoopingLinkedList<T>::size() {
 	return s;
 }
 
-template <typename T> T LoopingLinkedList<T>::grab() {
+template <typename T> T util::LoopingLinkedList<T>::grab() {
 	T value = current->data;
 	current = current->next;
 	return value;
 }
 
-template <typename T> void LoopingLinkedList<T>::reset() {
+template <typename T> void util::LoopingLinkedList<T>::reset() {
 	current = head;
 }
 
-LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* start) {
+util::LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* start) {
 	LoopingLinkedList<int>* inc = new LoopingLinkedList<int>;
 	std::vector<int>* wheel = new std::vector<int>;
 	int product = 1;
@@ -91,32 +91,32 @@ LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* start)
 	return inc;
 }
 
-Timekeeper::Timekeeper() {}
+util::Timekeeper::Timekeeper() {}
 
-void Timekeeper::start() {
+void util::Timekeeper::start() {
 	begin = std::chrono::high_resolution_clock::now();
 }
 
-void Timekeeper::stop() {
+void util::Timekeeper::stop() {
 	end = std::chrono::high_resolution_clock::now();	
 }
 
-void Timekeeper::printDurationSeconds() {
+void util::Timekeeper::printDurationSeconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
 	std::cout << "Time taken: " << timeTaken.count() << " seconds" << std::endl;
 }
 
-void Timekeeper::printDurationMilliseconds() {
+void util::Timekeeper::printDurationMilliseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 	std::cout << "Time taken: " << timeTaken.count() << " milliseconds" << std::endl;
 }
 
-void Timekeeper::printDurationMicroseconds() {
+void util::Timekeeper::printDurationMicroseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 	std::cout << "Time taken: " << timeTaken.count() << " microseconds" << std::endl;
 }
 
-void Timekeeper::printDurationNanoseconds() {
+void util::Timekeeper::printDurationNanoseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
 	std::cout << "Time taken: " << timeTaken.count() << " nanoseconds" << std::endl;
 }
