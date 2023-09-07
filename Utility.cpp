@@ -4,6 +4,7 @@
 template <typename T> util::LoopingLinkedList<T>::LoopingLinkedList() {
 			head = nullptr;
 			tail = nullptr;
+			current = nullptr;
 			s = 0;
 }
 template <typename T> util::LoopingLinkedList<T> util::LoopingLinkedList<T>::app(T item) {
