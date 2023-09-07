@@ -2,8 +2,7 @@
 #include <chrono>
 #include <iostream>
 
-#ifndef UTILITY_H
-#define UTILITY_H
+#pragma once
 
 namespace util {
 
@@ -41,18 +40,16 @@ namespace util {
 	};
 
 
-	LoopingLinkedList<int>* getIncrements(std::vector<int>*, int*);
+	LoopingLinkedList<int> getIncrements(std::vector<int>*, int*);
 
 	bool isPrimeWheel(long, int, std::vector<int>*, LoopingLinkedList<int>*);
 
 	bool isPrime(long);
 
-	std::vector<int>* genPrimesTo(int);
+	std::vector<int> genPrimesTo(int);
 
-	std::vector<int>* genPrimesCount(int);
+	std::vector<int> genPrimesCount(int);
 
 	bool isPower(int num, int base);
 
 }
-
-#endif

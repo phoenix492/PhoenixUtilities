@@ -44,9 +44,9 @@ template <typename T> void util::LoopingLinkedList<T>::reset() {
 	current = head;
 }
 
-util::LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* start) {
-	LoopingLinkedList<int>* inc = new LoopingLinkedList<int>;
-	std::vector<int>* wheel = new std::vector<int>;
+util::LoopingLinkedList<int> util::getIncrements(std::vector<int>* basis, int* start) {
+	LoopingLinkedList<int> inc;
+	std::vector<int> wheel;
 	int product = 1;
 	unsigned long candidate = 1;
 	bool wheelGenerated = false;
@@ -70,10 +70,10 @@ util::LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* 
 		// already finished listing out the first "turn" and we're finished.
 		// Otherwise we slap it onto the wheel and go again.
 		// THE && OPERATOR SHORT CIRCUITS HERE BY DESIGN
-		if (wheel->size() > 2 && candidate == wheel->front() + product) {
+		if (wheel.size() > 2 && candidate == wheel.front() + product) {
 			wheelGenerated=true;
 		} else if (pass) {
-			wheel->push_back(candidate);
+			wheel.push_back(candidate);
 		}
 		pass = true;
 	}
@@ -81,13 +81,13 @@ util::LoopingLinkedList<int>* util::getIncrements(std::vector<int>* basis, int* 
 	// We need to start at the first part of the wheel when we test, 
 	// we'll recreate this process and then take it further for each number 
 	// after we get the increments. 
-	*start = wheel->front();
+	*start = wheel.front();
 
 	// After the first turn, every subsequent turn is just {wheel}+(product of basis),
 	// therefore elements of the wheel are spaced out according to a pattern of
 	// increments, which we use our first turn to obtain now.
-	for (int i = 0; i < wheel->size() - 1; i++) {
-		inc->app(wheel->at(i+1) - wheel->at(i));
+	for (int i = 0; i < wheel.size() - 1; i++) {
+		inc.app(wheel.at(i+1) - wheel.at(i));
 	}
 
 	return inc;
@@ -134,11 +134,17 @@ std::string util::Timekeeper::durationNanoseconds() {
 
 
 bool util::isPrimeWheel(long num, int start, std::vector<int>* basis, LoopingLinkedList<int>* increments) {	
+
 	for (int prime : *basis) {
+		if (num == prime) {
+			return true;
+		}
+
 		if (num % prime == 0) {
 			return false;
 		}
 	}
+
 	for (long i = start; i*i < num; i += increments->grab()) {
 		if (num % i == 0) {
 			increments->reset();
@@ -161,22 +167,22 @@ bool util::isPrime(long num) {
 	return true;
 }
 
-std::vector<int>* util::genPrimesTo(int max) { 
-	std::vector<int>* primes = new std::vector<int>;
+std::vector<int> util::genPrimesTo(int max) { 
+	std::vector<int> primes;
 	for (int i = 2; i <= max; i++) {
 		if (util::isPrime(i)) {
-			primes->push_back(i);
+			primes.push_back(i);
 		}
 	}
 	return primes;
 }
 
-std::vector<int>* util::genPrimesCount(int max) {
-	std::vector<int>* primes = new std::vector<int>;
+std::vector<int> util::genPrimesCount(int max) {
+	std::vector<int> primes;
 	int count = 0;
 	for (int j = 2; count < max; j++) {
 		if (util::isPrime(j)) {
-			primes->push_back(j);
+			primes.push_back(j);
 			count++;
 		}
 	}
