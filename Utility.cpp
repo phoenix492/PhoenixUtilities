@@ -1,5 +1,6 @@
 #include "Utility.hpp"
 #include <sstream>
+#include <cmath>
 
 template <typename T> util::LoopingLinkedList<T>::LoopingLinkedList() {
 			head = nullptr;
@@ -145,8 +146,10 @@ bool util::isPrimeWheel(long num, int start, std::vector<int>* basis, LoopingLin
 			return false;
 		}
 	}
-
-	for (long i = start; i*i < num; i += increments->grab()) {
+	// Minor performance optimization, a single sqrt() operation beats multiple 
+	// i^2 operations when we check values of num as high as we do here	
+	int sqrtNum = std::sqrt(num);
+	for (long i = start; i < sqrtNum; i += increments->grab()) {
 		if (num % i == 0) {
 			increments->reset();
 			return false;
