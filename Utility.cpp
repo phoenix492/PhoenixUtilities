@@ -107,59 +107,43 @@ void util::Timekeeper::stop() {
 
 std::string util::Timekeeper::durationSeconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
-	std::ostringstream out;
-	out << timeTaken.count();
-	return out.str();
+	return std::to_string(timeTaken.count()) + "s";
 }
 
 std::string util::Timekeeper::durationMilliseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-	std::ostringstream out;
-	out << timeTaken.count();
-	return out.str();
+	return std::to_string(timeTaken.count()) + "ms";
 }
 
 std::string util::Timekeeper::durationMicroseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-	std::ostringstream out;
-	out << timeTaken.count();
-	return out.str();
+	return std::to_string(timeTaken.count()) + "μs";
 }
 
 std::string util::Timekeeper::durationNanoseconds() {
 	auto timeTaken = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-	std::ostringstream out;
-	out << timeTaken.count();
-	return out.str();
+	return std::to_string(timeTaken.count()) + "ns";
 }
 
 std::string util::Timekeeper::durationAuto() {
 	
-	std::ostringstream outNs;
 	auto timeTakenNs = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-	outNs << timeTakenNs.count();
 	if (timeTakenNs.count() < 1000) {
-		return outNs.str() + "ns";
+		return std::to_string(timeTakenNs.count()) + "ns";
 	}
 
-	std::ostringstream outUs;
 	auto timeTakenUs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-	outUs << timeTakenUs.count();
 	if (timeTakenUs.count() < 1000) {
-		return outUs.str() + "µs";
+		return std::to_string(timeTakenUs.count()) + "µs";
 	}
 
-	std::ostringstream outMs;
 	auto timeTakenMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-	outMs << timeTakenMs.count();
 	if (timeTakenMs.count() < 1000) {
-		return outMs.str() + "ms";
+		return std::to_string(timeTakenMs.count()) + "ms";
 	}
 
-	std::ostringstream outS;
 	auto timeTakenS  = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
-	outS << timeTakenS.count();
-	return outS.str() + "s";
+	return std::to_string(timeTakenS.count()) + "s";
 
 }
 
@@ -194,7 +178,8 @@ bool util::isPrime(long num) {
 		return true;
 	if (num < 2 || num % 2 == 0)
 		return false;
-	for (int i = 3; i*i <= num; i += 2) {
+	long numSqrt = std::sqrt(num);
+	for (int i = 3; i <= numSqrt; i += 2) {
 		if (num % i == 0)
 			return false;
 	}
