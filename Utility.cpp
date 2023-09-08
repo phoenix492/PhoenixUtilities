@@ -134,35 +134,32 @@ std::string util::Timekeeper::durationNanoseconds() {
 }
 
 std::string util::Timekeeper::durationAuto() {
-	std::ostringstream out;
 	
+	std::ostringstream outNs;
 	auto timeTakenNs = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-	out << timeTakenNs.count();
-	if (stoi(out.str()) < 1000) {
-		return out.str() + "ns";
+	outNs << timeTakenNs.count();
+	if (timeTakenNs.count() < 1000) {
+		return outNs.str() + "ns";
 	}
 
+	std::ostringstream outUs;
 	auto timeTakenUs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-	out.clear();
-	out.str("");
-	out << timeTakenUs.count();
-	if (stoi(out.str()) < 1000) {
-		return out.str() + "us";
+	outUs << timeTakenUs.count();
+	if (timeTakenUs.count() < 1000) {
+		return outUs.str() + "µs";
 	}
 
+	std::ostringstream outMs;
 	auto timeTakenMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-	out << timeTakenMs.count();
-	out.clear();
-	out.str("");
-	if (stoi(out.str()) < 1000) {
-		return out.str() + "ms";
+	outMs << timeTakenMs.count();
+	if (timeTakenMs.count() < 1000) {
+		return outMs.str() + "ms";
 	}
 
+	std::ostringstream outS;
 	auto timeTakenS  = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
-	out.clear();
-	out.str("");
-	out << timeTakenS.count();
-	return out.str() + "s";
+	outS << timeTakenS.count();
+	return outS.str() + "s";
 
 }
 
