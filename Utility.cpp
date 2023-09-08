@@ -133,6 +133,39 @@ std::string util::Timekeeper::durationNanoseconds() {
 	return out.str();
 }
 
+std::string util::Timekeeper::durationAuto() {
+	std::ostringstream out;
+	
+	auto timeTakenNs = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+	out << timeTakenNs.count();
+	if (stoi(out.str()) < 1000) {
+		return out.str() + "ns";
+	}
+
+	auto timeTakenUs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+	out.clear();
+	out.str("");
+	out << timeTakenUs.count();
+	if (stoi(out.str()) < 1000) {
+		return out.str() + "us";
+	}
+
+	auto timeTakenMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+	out << timeTakenMs.count();
+	out.clear();
+	out.str("");
+	if (stoi(out.str()) < 1000) {
+		return out.str() + "ms";
+	}
+
+	auto timeTakenS  = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
+	out.clear();
+	out.str("");
+	out << timeTakenS.count();
+	return out.str() + "s";
+
+}
+
 
 
 bool util::isPrimeWheel(long num, int start, std::vector<int>* basis, LoopingLinkedList<int>* increments) {	

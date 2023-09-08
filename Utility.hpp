@@ -37,6 +37,7 @@ namespace util {
 			std::string durationMilliseconds();
 			std::string durationMicroseconds();
 			std::string durationNanoseconds();
+			std::string durationAuto();
 	};
 
 
