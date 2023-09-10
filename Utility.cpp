@@ -147,7 +147,70 @@ std::string util::Timekeeper::durationAuto() {
 
 }
 
+util::Filekeeper::Filekeeper(std::string filePath) {
+	this->filePath = filePath;
+	file.open(filePath);
+	line = 1;
+}
 
+void util::Filekeeper::reset() {
+	file.close();
+	file.open(filePath);
+	line = 1;
+}
+
+void util::Filekeeper::backLine(int count) {
+	int targetLine = line - count;
+	this->reset();
+	// We're *at* the first line, so we need to skip lines up to but NOT
+	// including the target line
+	nextLine(targetLine - 1);
+}
+
+void util::Filekeeper::nextLine(int count) {
+	for (int i = 0; i < count; i++) { 
+		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		line++;
+	}
+}
+
+std::string util::Filekeeper::grabLine() {
+	std::string grabbedLine; 
+	std::getline(file, grabbedLine);
+	line++;
+	backLine();
+	return grabbedLine;
+}
+
+char util::Filekeeper::grabNthChar(int n) {
+	for (int i = 0; i < n - 1; i++) {
+		file.ignore(1);
+	}
+
+	char nthChar = file.get();
+	for (int i = n; i > 0; i--) {
+		file.unget();
+	}
+
+	return nthChar;
+}
+
+std::string util::Filekeeper::grabCharNtoM(int n, int m) {
+	for (int i = 0; i < n - 1; i++) {
+		file.ignore(1);
+	}
+
+	std::string charNtoM = "";
+	for (int i = n; i < m + 1; i ++) {
+		charNtoM += file.get();
+	}
+
+	for (int i = m; i > 0; i--) {
+		file.unget();
+	}
+	
+	return charNtoM;
+}
 
 bool util::isPrimeWheel(long num, int start, std::vector<int>* basis, LoopingLinkedList<int>* increments) {	
 

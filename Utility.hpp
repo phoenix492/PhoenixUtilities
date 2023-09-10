@@ -1,6 +1,7 @@
 #include <vector>
 #include <chrono>
 #include <iostream>
+#include <fstream>
 
 #pragma once
 
@@ -38,6 +39,24 @@ namespace util {
 			std::string durationMicroseconds();
 			std::string durationNanoseconds();
 			std::string durationAuto();
+	};
+
+	// Filekeeper manages an ifstream to make it behave more like a "point and
+	// select" type tool, advancing lines and characters manually then get()ing 
+	// desired text and moving back in the stream to before the get().
+	class Filekeeper {
+		private:
+			std::ifstream file;
+			std::string filePath;
+			int line;
+		public:
+			Filekeeper(std::string);
+			void reset();
+			void backLine(int = 1);
+			void nextLine(int = 1);
+			std::string grabLine();
+			char grabNthChar(int);
+			std::string grabCharNtoM(int, int);
 	};
 
 
