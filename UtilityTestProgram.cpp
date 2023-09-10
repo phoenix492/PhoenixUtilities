@@ -23,6 +23,11 @@ int main() {
 	file.backLine(3);
 	std::cout << "First line one final time: " << std::endl << file.grabLine() << std::endl;
 	time.stop();
-	std::cout << "Time elapsed: " << time.durationAuto() << std::endl;
+	std::cout << "Time elapsed (auto): " << time.durationAuto() << std::endl;
+	std::cout << "Time elapsed (seconds): " << time.durationSeconds() << std::endl;
+	std::cout << "Time elapsed (milliseconds): " << time.durationMilliseconds() << std::endl;
+	std::cout << "Time elapsed (microseconds): " << time.durationMicroseconds() << std::endl;
+	std::cout << "Time elapsed (nanoseconds): " << time.durationNanoseconds() << std::endl;
+
 }
 
