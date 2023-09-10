@@ -212,6 +212,10 @@ std::string util::Filekeeper::grabCharNtoM(int n, int m) {
 	return charNtoM;
 }
 
+bool util::Filekeeper::eof() {
+	return file.eof();
+}
+
 bool util::isPrimeWheel(long num, int start, std::vector<int>* basis, LoopingLinkedList<int>* increments) {	
 
 	for (int prime : *basis) {

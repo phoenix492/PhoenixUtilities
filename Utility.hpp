@@ -57,6 +57,7 @@ namespace util {
 			std::string grabLine();
 			char grabNthChar(int);
 			std::string grabCharNtoM(int, int);
+			bool eof();
 	};
 
 
